@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<nav class="navbar navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href=""></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel"></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+              <a class="nav-link" href="#home">Home</a>
+              <a class="nav-link active" href="projects">Projects</a>
+              <a class="nav-link scroll-link" href="#about">About</a>
+              <a class="nav-link scroll-link" href="#contact">Contact</a>
+              
+          </li>
+        </ul>
+    </nav>
+  
+  </div>
+  <br><br>
+  
+  <!-- Page Start -->
+  <div id="home" class="w3-content" style="max-width:1564px">
+  
+  <!-- Header -->
+<header class="w3-container w3-theme w3-padding-32" id="myHeader">
+   
+  <div class="w3-center">
+  <h4>BEAUTIFUL RESPONSIVE WEB SITES</h4>
+  <h1 class="w3-xxxlarge w3-animate-bottom">BUILT WITH DJANGO</h1>
+    <div class="w3-padding-32">
+      <button class="w3-button w3-xlarge w3-theme-light" onclick="document.getElementById('id01').style.display='block'" style="font-weight:900;">PERSONAL WEB PROJECTS</button>
+    </div>
+  </div>
+</header>
+
+<!-- Modal -->
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-top">
+      <header class="w3-container w3-theme"> 
+        <span onclick="document.getElementById('id01').style.display='none'"
+        class="w3-button w3-display-topright">×</span>
+        <h4>Oh snap! I just showed you a modal..</h4>
+        <h5>Because i can <i class="fa fa-smile-o"></i></h5>
+      </header>
+      <div class="w3-padding">
+        <p>Cool huh? Ok, enough teasing around..</p>
+        <p>Go to my <a class="w3-button w3-theme" href="projects">PROJECTS page</a> to learn more!</p>
+      </div>
+    </div>
+</div>
+
+<div class="w3-row-padding w3-center w3-margin-top">
+<div class="w3-third">
+  <div class="w3-card w3-container" style="min-height:460px">
+  <h3>Responsive</h3><br>
+  <i class="fa fa-desktop w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+  <p>Built-in responsiveness</p>
+  <p>Mobile first fluid grid</p>
+  <p>Fits any screen sizes</p>
+  <p>PC Tablet and Mobile</p>
+  </div>
+</div>
+
+<div class="w3-third">
+  <div class="w3-card w3-container" style="min-height:460px">
+  <h3>Styling</h3><br>
+  <i class="fa fa-css3 w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+  <p>Standard CSS </p>
+  <p>Bootstrap</p>
+  </div>
+</div>
+
+<div class="w3-third">
+  <div class="w3-card w3-container" style="min-height:460px">
+  <h3>Design</h3><br>
+  <i class="fa fa-diamond w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+  <p>Paper like design</p>
+  <p>Bold colors and shadows</p>
+  <p>Equal across platforms</p>
+  <p>Equal across devices</p>
+  </div>
+</div>
+</div>
+
+
+     
+   
+    <!--About-->
+   <div> 
+  <div style="text-align: center;">
+  <h2  class="w3-container  w3-theme" id="about">About Me</h2>
+
+  <div class="w3-padding w3-white w3-display-container" style="font-family: Raleway; font-size: 20px;">
+  <p>I am a dedicated web developer with expertise in Django, HTML, CSS, and Bootstrap, constantly researching and improving my skills to become an expert in the field.
+     Passionate about building responsive and dynamic websites, I strive to create seamless digital experiences.<br><br> Beyond web development, I am also a trader, driven by strategy, analysis, and the pursuit of success.
+     My goal is to excel in everything I do—continuously learning, adapting, and pushing boundaries to achieve greatness in both tech and trading.</p>
+</div>
+</div>
+
+<div style="text-align: center;">
+  <h2  class="w3-container  w3-theme" id="about">Skills</h2>
+
+
+  <!-- progress bar -->
+  
+   </div>
+    <h3> HTML </h3>
+    <div class="progress" role="progressbar" aria-label="Success striped example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-bar progress-bar-striped bg-success" style="width: 87%"></div>
+    </div>
+    
+    <hr>
+
+    <h3> CSS </h3>
+    <div class="progress" role="progressbar" aria-label="Info striped example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-bar progress-bar-striped bg-info" style="width: 70%"></div>
+    </div>
+    
+    <hr>
+    <h3> Boostrap </h3>
+    <div class="progress" role="progressbar" aria-label="Warning striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-bar progress-bar-striped bg-warning" style="width: 70%"></div>
+    </div>
+    
+    <hr>
+    <h3> Python (Django) </h3>
+    <div class="progress" role="progressbar" aria-label="Danger striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-bar progress-bar-striped bg-danger" style="width: 50%"></div>
+    </div>
+
+
+<hr>
+
+
+
+
+  
+
+ <!-- Contact Section-->
+<div id="contact" class="w3-container w3-center w3-padding-32">
+
+  <h2 class="w3-wide">CONTACT</h2>
+  Abuja, NG<br>
+  Phone: +234 <br>
+  Email: mail@mail.com<br>
+  <p class="w3-opacity w3-center"><i>Drop a note!</i></p>
+  
+  <form action="#" target="_blank" method="POST">
+    {% csrf_token %}
+    {{ form.as_p}}
+  <input class="w3-input" type="text" placeholder="Name" required name="Name">
+  <input class="w3-input" type="text" placeholder="Email" required name="Email">
+  <input class="w3-input" type="text" placeholder="Message" required name="Message"><br>
+  <button class="w3-button w3-black" type="submit">SEND</button>
+  </form>
+    {% if messages %}
+         <div class="messages mb-4">
+              {% for message in messages %}
+                  <p>{{ message }}</p>
+         </div>
+         {% endfor %}
+         {% endif %}
+           
+  
+  <br>
+
+  
+    
+  
+
+  <!-- Footer -->
+<footer class="w3-container w3-theme-dark w3-padding-16">
+  <h3>Footer</h3>
+  <p>Powered by @Emmy9909</p>
+  <div style="position:relative;bottom:55px;" class="w3-tooltip w3-right">
+    <span class="w3-text w3-theme-light w3-padding">Go To Top</span>    
+    <a href="#myHeader"><span class="w3-xlarge">
+    <i class="fa fa-chevron-circle-up"></i></span></a>
+  </div>
+  <p>Remember to check out our  <a href="https://github.com/Emmy9909" class="w3-button w3-theme-light" target="_blank">MY GIT PAGES</a></p>
+</footer>
+  </div>
+  
+  <!-- Page End -->
+  </div>
+  
+
+          
+   
+  
+
+
+    
+
+
+
+
+
+{% endblock %}
