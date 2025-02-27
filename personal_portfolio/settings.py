@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 import environ
+import django_heroku 
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,15 +24,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-6hue&(ypa1=6=ki+6b8eifn8^w#j#qjcda5uk13vsb^@rx$f31'
+SECRET_KEY = os.environ.get('django-insecure-6hue&(ypa1=6=ki+6b8eifn8^w#j#qjcda5uk13vsb^@rx$f31')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-env = environ.Env()
-environ.Env.read_env() 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1', 'localhost'])
+env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
+load_dotenv(env_path)
 
-DEBUG = True 
+# SECURITY WARNING: don't run with debug turned on in productiion!
+DEBUG = os.environ.get('DJANGO_DUBUG, ') != 'False'
 
 ALLOWED_HOSTS = ['*']
 
@@ -56,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'personal_portfolio.urls'
@@ -136,7 +139,7 @@ MEDIA_ROOT = BASE_DIR / "uploads/"
 MEDIA_URL = "/media/"
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, '/static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "website/static")]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Email Configuration
@@ -146,5 +149,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('REPO_EMAIL')
 EMAIL_HOST_PASSWORD = os.environ.get('REPO_PASSWORD')
+
+# Activate Django-heroku
+django_heroku.settings(locals())
 
 

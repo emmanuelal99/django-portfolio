@@ -15,3 +15,9 @@ db.sqlite3
 # Ignore sensitive files
 *.key
 *.pem
+
+# Ignore Django secrets
+*.sqlite3
+*.log
+.env
+
