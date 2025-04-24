@@ -1,0 +1,11 @@
+services:
+  - type: "web"
+    name: "django_portfolio"
+    env: "python"
+    buildCommand: "./build.sh"
+    startCommand: "./start.sh"
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"

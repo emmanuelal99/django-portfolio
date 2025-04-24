@@ -1,12 +1,10 @@
 from django.urls import path
-from projects import views
-from django.urls import include 
+from . import views
 
 
 urlpatterns = [
-    path('', views.project_index, name='project_index'),
-    path('<int:pk>/', views.project_details, name='project_detail'),
-    path('pages', include('pages.urls')),
-    
-
+    path('', views.index, name='project_index'),
+    path('projects/<int:pk>/', views.details, name='project_detail'),
+    path('resume/', views.resume_view, name='resume'),
+    path('pdf/', views.generate_resume_pdf, name='resume_pdf'),
 ]
