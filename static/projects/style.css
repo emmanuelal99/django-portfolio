@@ -341,3 +341,8 @@ body {
 .blue-text { 
 	color: #363D73; 
 }
+@media screen and (max-width: 600px) {
+    .my-heading {
+        font-size: 2rem;
+    }
+}

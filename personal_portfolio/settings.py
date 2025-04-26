@@ -1,15 +1,28 @@
+# =========================================
+# DJANGO SETTINGS MODULE
+# Organized for clarity and scalability
+# =========================================
 from dotenv import load_dotenv
 import os
 from pathlib import Path
 import dj_database_url
+import cloudinary
 
+
+# =========================================
+# ENVIRONMENT VARIABLES
+# =========================================
 load_dotenv()
 
+# =========================================
+# BASE DIRECTORY
+# =========================================
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# =========================================
 # SECURITY SETTINGS
+# =========================================
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
-
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
@@ -23,14 +36,13 @@ if not os.getenv("DJANGO_SECRET_KEY") and not DEBUG:
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-fallback-secret")
 
-ALLOWED_HOSTS = ['django-portfolio-9qrh.onrender.com']
-
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1, django-portfolio-9qrh.onrender.com').split(',')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-
-
-# Application definition
+# =========================================
+# APPLICATION DEFINITION
+# =========================================
 INSTALLED_APPS = [
     'projects',
     'django.contrib.admin',
@@ -54,6 +66,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# =========================================
+# URLS AND WSGI
+# =========================================
 ROOT_URLCONF = 'personal_portfolio.urls'
 
 TEMPLATES = [
@@ -74,7 +89,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'personal_portfolio.wsgi.application'
 
-## DATABASES
+# =========================================
+# DATABASE CONFIGURATION
+# =========================================
 if not os.getenv("DATABASE_URL") and not DEBUG:
     raise ValueError("DATABASE_URL must be set in production.")
 
@@ -86,52 +103,52 @@ DATABASES = {
     )
 }
 
-# Password validation
+# =========================================
+# PASSWORD VALIDATION
+# =========================================
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
-# Internationalization
+# =========================================
+# INTERNATIONALIZATION
+# =========================================
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static & Media
+# =========================================
+# STATIC & MEDIA FILES
+# =========================================
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+)
 
-    # ===== Cloudinary Media Storage =====
 if not DEBUG:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
-        'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-        'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
-    }
 
-
+# =========================================
+# DEFAULT PRIMARY KEY FIELD TYPE
+# =========================================
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Email Configuration
+# =========================================
+# EMAIL CONFIGURATION
+# =========================================
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -139,14 +156,13 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
+# =========================================
+# LOGGING CONFIGURATION
+# =========================================
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
+    'handlers': {'console': {'class': 'logging.StreamHandler'}},
     'root': {
         'handlers': ['console'],
         'level': 'DEBUG' if DEBUG else 'WARNING',
