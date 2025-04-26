@@ -10,29 +10,37 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY SETTINGS
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
 if not os.getenv("DJANGO_SECRET_KEY") and not DEBUG:
     raise ValueError("DJANGO_SECRET_KEY must be set in production.")
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-fallback-secret")
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+ALLOWED_HOSTS = ['django-portfolio-9qrh.onrender.com']
 
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 
 # Application definition
 INSTALLED_APPS = [
     'projects',
-    'cloudinary',
-    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -102,16 +110,23 @@ USE_TZ = True
 
 # Static & Media
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR /'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
-# Media files (uploaded user files)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10 MB
 
+    # ===== Cloudinary Media Storage =====
+if not DEBUG:
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+        'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+        'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+    }
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -137,22 +152,3 @@ LOGGING = {
         'level': 'DEBUG' if DEBUG else 'WARNING',
     },
 }
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Default email sender
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
-# CSRF trusted origins (for HTTPS form submissions)
-CSRF_TRUSTED_ORIGINS = ['https://yourapp.onrender.com']
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv("CLOUDINARY_CLOUD_NAME", ""),
-    'API_KEY': os.getenv("CLOUDINARY_API_KEY", ""),
-    'API_SECRET': os.getenv("CLOUDINARY_API_SECRET", ""),
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-
-

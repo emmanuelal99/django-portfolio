@@ -5,7 +5,7 @@ class Project (models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     technology = models.CharField(max_length=20)
-    image = models.FileField(upload_to='projects/%Y/%m/%d/', null=True, blank=True)
+    image = models.FileField(upload_to="projects/", null=True, blank=True)
     github_link = models.URLField(max_length=200, null=True, blank=True)
     
 
