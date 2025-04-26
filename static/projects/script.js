@@ -1,13 +1,19 @@
-// Close the menu when a link is clicked
-document.querySelectorAll('.menu-list-items a').forEach(link => {
-    link.addEventListener('click', () => {
-        const menu = document.querySelector('.menu');
-        const hamburger = document.getElementById('hamburger');
+//index.js
 
-        // If the menu is open, close it
-        if (menu.classList.contains('active')) {
-            menu.classList.remove('active');
-            hamburger.classList.remove('active');
-        }
-    });
+const hamburger = document.getElementById('hamburger'); 
+const menu = document.querySelector('.menu'); 
+
+hamburger.addEventListener('click', function () { 
+	const hamIcon = this.querySelector('.hamburger-icon'); 
+	const crossIcon = this.querySelector('.cross-icon'); 
+	if (hamIcon.style.display === "none") { 
+		hamIcon.style.display = "inline-block"
+		menu.style.display = "none"
+		crossIcon.style.display = "none"
+	} 
+	else { 
+		crossIcon.style.display = "inline-block"
+		hamIcon.style.display = "none"
+		menu.style.display = "block"
+	} 
 });

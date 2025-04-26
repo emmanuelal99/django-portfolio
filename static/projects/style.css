@@ -31,12 +31,7 @@ body {
 
 .menu { 
 	padding: 0 5rem; 
-    display: none;
 } 
-
-.menu.active {
-    display: block;
-}
 
 .hamburger { 
 	display: none; 
@@ -65,7 +60,7 @@ body {
 
 /* Main Hero Section Styles */
 .hero { 
-	background-image: url('./Images/heroImg3.avif'); 
+    background-image: url('/static/projects/images/background2.webp');
 	background-repeat: no-repeat; 
 	background-size: 100% 100%; 
 	width: 100%; 
